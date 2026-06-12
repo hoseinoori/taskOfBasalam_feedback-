@@ -36,7 +36,7 @@ class FeedbackOut(BaseModel):
     class Config:
         from_attributes = True
         
-app = FastAPI(title="Feedback Board API")
+app = FastAPI(title="Feedback For Basalam(hoseinoori)")
 
 app.add_middleware(
     CORSMiddleware,
@@ -52,3 +52,11 @@ def get_db():
         yield db
     finally:
         db.close()
+        
+@app.post("/api/feedbacks/", response_model=FeedbackOut)
+def create_feedback(feedback: FeedbackCreate, db: Session = Depends(get_db)):
+    new_feedback = FeedbackDB(title=feedback.title, message=feedback.message)
+    db.add(new_feedback)
+    db.commit()
+    db.refresh(new_feedback)
+    return new_feedback
