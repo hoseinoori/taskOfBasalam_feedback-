@@ -19,3 +19,19 @@ class FeedbackDB(Base):
     status = Column(String, default="ثبت شده")
 
 Base.metadata.create_all(bind=engine)
+
+class FeedbackCreate(BaseModel):
+    title: str
+    message: str
+
+class FeedbackUpdate(BaseModel):
+    status: str
+
+class FeedbackOut(BaseModel):
+    id: int
+    title: str
+    message: str
+    status: str
+
+    class Config:
+        from_attributes = True
