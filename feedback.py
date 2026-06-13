@@ -60,3 +60,23 @@ def create_feedback(feedback: FeedbackCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(new_feedback)
     return new_feedback
+
+@app.get("/api/feedbacks/", response_model=list[FeedbackOut])
+def get_feedbacks(db: Session = Depends(get_db)):
+    return db.query(FeedbackDB).all()
+
+@app.patch("/api/feedbacks/{feedback_id}/status", response_model=FeedbackOut)
+def update_feedback_status(feedback_id: int, status_update: FeedbackUpdate, db: Session = Depends(get_db)):
+    
+    valid_statuses = ["ثبت شده", "در حال بررسی", "رسیدگی شده"]
+    if status_update.status not in valid_statuses:
+        raise HTTPException(status_code=400, detail="وضعیت نامعتبر است")
+    
+    db_feedback = db.query(FeedbackDB).filter(FeedbackDB.id == feedback_id)
+    if not db_feedback:
+        raise HTTPException(status_code=404, detail="فیدبک پیدا نشد")
+    
+    db_feedback.status = status_update.status
+    db.commit()
+    db.refresh(db_feedback)
+    return db_feedback
