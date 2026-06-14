@@ -39,6 +39,34 @@
       <p id="responseMsg" class="mt-4 text-center text-sm hidden"></p>
     </div>
 
-    <script></script>
+    <script>
+      document
+        .getElementById("feedbackForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const title = document.getElementById("title").value;
+          const message = document.getElementById("message").value;
+          const msgEl = document.getElementById("responseMsg");
+
+          try {
+            const res = await fetch("http://127.0.0.1:8000/api/feedbacks/", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ title: title, message: message }),
+            });
+
+            if (res.ok) {
+              msgEl.textContent = "فیدبک شما با موفقیت ثبت شد!";
+              msgEl.className = "mt-4 text-center text-sm text-green-600 block";
+              document.getElementById("feedbackForm").reset();
+            }
+          } catch (error) {
+            msgEl.textContent =
+              "خطا در ارتباط با سرور. مطمئن شوید که بک‌اند روشن است.";
+            msgEl.className = "mt-4 text-center text-sm text-red-600 block";
+          }
+        });
+    </script>
   </body>
 </html>
