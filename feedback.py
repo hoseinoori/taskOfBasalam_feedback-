@@ -86,7 +86,7 @@ def update_feedback_status(
     if status_update.status not in valid_statuses:
         raise HTTPException(status_code=400, detail="وضعیت نامعتبر است")
 
-    db_feedback = db.query(FeedbackDB).filter(FeedbackDB.id == feedback_id)
+    db_feedback = db.query(FeedbackDB).filter(FeedbackDB.id == feedback_id).first()
     if not db_feedback:
         raise HTTPException(status_code=404, detail="فیدبک پیدا نشد")
 
