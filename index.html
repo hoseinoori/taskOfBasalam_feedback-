@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ثبت فیدبک</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 p-8 font-sans">
+    <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+      <h1 class="text-2xl font-bold mb-4 text-center">ثبت فیدبک جدید</h1>
+
+      <form id="feedbackForm" class="space-y-4">
+        <div>
+          <label class="block mb-1 text-sm font-medium">عنوان:</label>
+          <input
+            type="text"
+            id="title"
+            required
+            class="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+        <div>
+          <label class="block mb-1 text-sm font-medium">متن پیام:</label>
+          <textarea
+            id="message"
+            required
+            rows="4"
+            class="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          ></textarea>
+        </div>
+        <button
+          type="submit"
+          class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+        >
+          ارسال فیدبک
+        </button>
+      </form>
+
+      <p id="responseMsg" class="mt-4 text-center text-sm hidden"></p>
+    </div>
+
+    <script></script>
+  </body>
+</html>
