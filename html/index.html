@@ -4,33 +4,65 @@
     <meta charset="UTF-8" />
     <title>ثبت فیدبک</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                turquoise: {
+                  light: "#E6F6F5",
+                  DEFAULT: "#00A896",
+                  dark: "#008475",
+                },
+                orange: {
+                  light: "#FFF3E6",
+                  DEFAULT: "#FF7A00",
+                  dark: "#E06B00",
+                },
+                charcoal: "#2D3748",
+                bgLight: "#FAFAFA",
+              },
+            },
+          },
+        },
+      };
+    </script>
   </head>
-  <body class="bg-gray-100 p-8 font-sans">
-    <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
-      <h1 class="text-2xl font-bold mb-4 text-center">ثبت فیدبک جدید</h1>
+  <body class="bg-brand-orange p-8 font-sans">
+    <div
+      class="max-w-md mx-auto bg-brand-turquoise-light p-6 rounded-lg shadow-md"
+    >
+      <h1 class="text-2xl font-bold mb-4 text-center text-brand-orange-dark">
+        ثبت فیدبک جدید
+      </h1>
 
       <form id="feedbackForm" class="space-y-4">
         <div>
-          <label class="block mb-1 text-sm font-medium">عنوان:</label>
+          <label class="text-brand-orange-dark mb-2 text-sm font-medium"
+            >عنوان:</label
+          >
           <input
             type="text"
             id="title"
             required
-            class="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            class="w-full bg-brand-orange-light border p-2 rounded focus:outline-none focus:ring-2 focus:ring-brand-turquoise-dark text-brand-charcoal"
           />
         </div>
         <div>
-          <label class="block mb-1 text-sm font-medium">متن پیام:</label>
+          <label class="text-brand-orange-dark mb-2 text-sm font-medium"
+            >متن پیام:</label
+          >
           <textarea
             id="message"
             required
             rows="4"
-            class="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            class="w-full bg-brand-orange-light border p-2 rounded focus:outline-none focus:ring-2 focus:ring-brand-turquoise-dark text-brand-charcoal"
           ></textarea>
         </div>
         <button
           type="submit"
-          class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+          class="w-full bg-brand-turquoise text-brand-orange-light p-2 rounded hover:bg-brand-turquoise-dark"
         >
           ارسال فیدبک
         </button>
@@ -58,13 +90,15 @@
 
             if (res.ok) {
               msgEl.textContent = "فیدبک شما با موفقیت ثبت شد!";
-              msgEl.className = "mt-4 text-center text-sm text-green-600 block";
+              msgEl.className =
+                "mt-4 text-center text-sm text-brand-turquoise block";
               document.getElementById("feedbackForm").reset();
             }
           } catch (error) {
             msgEl.textContent =
               "خطا در ارتباط با سرور. مطمئن شوید که بک‌اند روشن است.";
-            msgEl.className = "mt-4 text-center text-sm text-red-600 block";
+            msgEl.className =
+              "mt-4 text-center text-sm text-brand-orange block";
           }
         });
     </script>
