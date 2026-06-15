@@ -4,13 +4,41 @@
     <meta charset="UTF-8" />
     <title>داشبورد مدیریت فیدبک‌ها</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                turquoise: {
+                  light: "#E6F6F5",
+                  DEFAULT: "#00A896",
+                  dark: "#008475",
+                },
+                orange: {
+                  light: "#FFF3E6",
+                  DEFAULT: "#FF7A00",
+                  dark: "#E06B00",
+                },
+                charcoal: "#2D3748",
+                bgLight: "#FAFAFA",
+              },
+            },
+          },
+        },
+      };
+    </script>
   </head>
-  <body class="bg-gray-100 p-8 font-sans">
-    <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
-      <h1 class="text-2xl font-bold mb-6">داشبورد فیدبک‌ها</h1>
+  <body class="bg-brand-orange p-8 font-sans">
+    <div
+      class="max-w-4xl mx-auto bg-brand-turquoise-light p-6 rounded-lg shadow-md"
+    >
+      <h1 class="text-2xl text-brand-charcoal font-bold mb-6">
+        داشبورد فیدبک‌ها
+      </h1>
 
       <div id="feedbacksContainer" class="space-y-4">
-        <p class="text-gray-500">در حال دریافت اطلاعات...</p>
+        <p class="text-brand-orange">در حال دریافت اطلاعات...</p>
       </div>
     </div>
 
@@ -39,23 +67,23 @@
 
           if (feedbacks.length === 0) {
             container.innerHTML =
-              '<p class="text-gray-500">هیچ فیدبکی ثبت نشده است.</p>';
+              '<p class="text-brand-turquoise">هیچ فیدبکی ثبت نشده است.</p>';
             return;
           }
 
           feedbacks.forEach((fb) => {
             const div = document.createElement("div");
             div.className =
-              "border p-4 rounded bg-gray-50 flex justify-between items-center";
+              "border p-4 rounded bg-brand-orange-light flex justify-between items-center";
 
             div.innerHTML = `
                         <div>
-                            <h2 class="text-lg font-bold">${fb.title}</h2>
-                            <p class="text-gray-700 text-sm mt-1">${fb.message}</p>
+                            <h2 class="text-lg font-bold text-brand-orange-dark">${fb.title}</h2>
+                            <p class="text-brand-charcoal text-sm mt-1">${fb.message}</p>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span class="text-sm font-medium">وضعیت:</span>
-                            <select class="status-select border p-2 rounded text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">
+                            <span class="text-sm font-medium text-brand-orange">وضعیت:</span>
+                            <select class="status-select border p-2 rounded text-sm bg-brand-turquoise-light focus:outline-none focus:ring-2 focus:ring-brand-turquoise cursor-pointer">
                                 <option value="ثبت شده" ${fb.status === "ثبت شده" ? "selected" : ""}>ثبت شده</option>
                                 <option value="در حال بررسی" ${fb.status === "در حال بررسی" ? "selected" : ""}>در حال بررسی</option>
                                 <option value="رسیدگی شده" ${fb.status === "رسیدگی شده" ? "selected" : ""}>رسیدگی شده</option>
@@ -74,7 +102,7 @@
           });
         } catch (error) {
           document.getElementById("feedbacksContainer").innerHTML =
-            '<p class="text-red-500">خطا در دریافت اطلاعات از سرور.</p>';
+            '<p class="text-brand-orange">خطا در دریافت اطلاعات از سرور.</p>';
         }
       }
 
