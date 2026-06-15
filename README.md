@@ -64,11 +64,11 @@ uvicorn feedback:app --reload
 
 ### نمای صفحه کاربر:
 
-<img src="image/Screenshot 2026-06-14 191936.png" alt="فرم ثبت فیدبک کاربر" width="600px">
+<img src="image/Screenshot 2026-06-15 093412.png" alt="فرم ثبت فیدبک کاربر" width="600px">
 
 ### نمای داشبورد مدیریت:
 
-<img src="image/Screenshot 2026-06-14 192127.png" alt="داشبورد مدیریت فیدبک‌ها" width="600px">
+<img src="image/Screenshot 2026-06-15 093436.png" alt="داشبورد مدیریت فیدبک‌ها" width="600px">
 
 ---
 
