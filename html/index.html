@@ -30,6 +30,12 @@
     </script>
   </head>
   <body class="bg-brand-orange p-8 font-sans">
+    <button
+      onclick="handleLogout()"
+      class="bg-red-500 hover:bg-red-600 text-white text-sm px-3 py-1.5 rounded transition font-medium"
+    >
+      خروج از حساب
+    </button>
     <div
       class="max-w-md mx-auto bg-brand-turquoise-light p-6 rounded-lg shadow-md"
     >
@@ -101,6 +107,13 @@
               "mt-4 text-center text-sm text-brand-orange block";
           }
         });
+
+      async function handleLogout() {
+        await fetch("http://127.0.0.1:8000/api/auth/logout", {
+          method: "POST",
+        });
+        window.location.href = "login.html";
+      }
     </script>
   </body>
 </html>

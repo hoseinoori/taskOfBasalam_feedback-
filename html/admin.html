@@ -30,6 +30,12 @@
     </script>
   </head>
   <body class="bg-brand-orange p-8 font-sans">
+    <button
+      onclick="handleLogout()"
+      class="bg-red-500 hover:bg-red-600 text-white text-sm px-3 py-1.5 rounded transition font-medium"
+    >
+      خروج از حساب
+    </button>
     <div
       class="max-w-4xl mx-auto bg-brand-turquoise-light p-6 rounded-lg shadow-md"
     >
@@ -104,6 +110,13 @@
           document.getElementById("feedbacksContainer").innerHTML =
             '<p class="text-brand-orange">خطا در دریافت اطلاعات از سرور.</p>';
         }
+      }
+
+      async function handleLogout() {
+        await fetch("http://127.0.0.1:8000/api/auth/logout", {
+          method: "POST",
+        });
+        window.location.href = "login.html";
       }
 
       loadFeedbacks();

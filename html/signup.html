@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ثبت‌نام در سیستم باسلام</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                turquoise: {
+                  light: "#E6F6F5",
+                  DEFAULT: "#00A896",
+                  dark: "#008475",
+                },
+                orange: {
+                  light: "#FFF3E6",
+                  DEFAULT: "#FF7A00",
+                  dark: "#E06B00",
+                },
+                charcoal: "#2D3748",
+                bgLight: "#FAFAFA",
+              },
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-brand-orange h-screen flex items-center justify-center p-4">
+    <div
+      class="bg-brand-turquoise-light p-8 rounded-lg shadow-md w-full max-w-md border border-gray-100"
+    >
+      <h1 class="text-2xl font-bold text-brand-charcoal text-center mb-6">
+        ایجاد حساب کاربری
+      </h1>
+
+      <form id="signupForm" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-brand-charcoal mb-1"
+            >نام کاربری</label
+          >
+          <input
+            type="text"
+            id="username"
+            required
+            class="w-full bg-brand-orange-light border p-2 rounded focus:outline-none focus:ring-2 focus:ring-brand-turquoise"
+          />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-brand-charcoal mb-1"
+            >رمز عبور</label
+          >
+          <input
+            type="password"
+            id="password"
+            required
+            class="w-full bg-brand-orange-light border p-2 rounded focus:outline-none focus:ring-2 focus:ring-brand-turquoise"
+          />
+        </div>
+
+        <div
+          class="flex items-center gap-2 bg-brand-orange-light p-3 rounded border"
+        >
+          <input
+            type="checkbox"
+            id="isAdmin"
+            class="w-4 h-4 text-brand-turquoise focus:ring-brand-turquoise rounded cursor-pointer"
+          />
+          <label
+            for="isAdmin"
+            class="text-sm font-medium text-brand-charcoal cursor-pointer"
+            >این حساب کاربری دسترسی "مدیر (Admin)" داشته باشد.</label
+          >
+        </div>
+
+        <p id="msg" class="text-sm text-center font-medium hidden"></p>
+
+        <button
+          type="submit"
+          class="w-full bg-brand-turquoise hover:bg-brand-turquoise-dark text-white p-2 rounded font-medium transition duration-200"
+        >
+          ثبت‌نام
+        </button>
+      </form>
+
+      <p class="text-sm text-gray-600 text-center mt-4">
+        قبلاً ثبت‌نام کرده‌اید؟
+        <a
+          href="login.html"
+          class="text-brand-turquoise font-bold hover:underline"
+          >وارد شوید</a
+        >
+      </p>
+    </div>
+
+    <script>
+      document
+        .getElementById("signupForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
+          const is_admin = document.getElementById("isAdmin").checked;
+          const msgEl = document.getElementById("msg");
+
+          try {
+            const res = await fetch("http://127.0.0.1:8000/api/auth/signup", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ username, password, is_admin }),
+            });
+            const data = await res.json();
+
+            if (!res.ok) throw new Error(data.detail || "خطا در ثبت‌نام");
+
+            msgEl.className = "text-sm text-center font-medium text-green-600";
+            msgEl.textContent = "ثبت‌نام با موفقیت انجام شد! در حال انتقال...";
+            msgEl.classList.remove("hidden");
+
+            setTimeout(() => {
+              window.location.href = "login.html";
+            }, 1500);
+          } catch (error) {
+            msgEl.className = "text-sm text-center font-medium text-red-500";
+            msgEl.textContent = error.message;
+            msgEl.classList.remove("hidden");
+          }
+        });
+    </script>
+  </body>
+</html>
